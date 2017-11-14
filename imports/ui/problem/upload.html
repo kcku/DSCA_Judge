@@ -1,0 +1,14 @@
+<template name="problem_upload">
+	<div class="card" style={{#unless currentProblemId.get}}display:none{{/unless}}>
+		<div class="card-body">
+			<form class="upload-form">
+				<div class="form-group row align-items-center justify-content-between">
+					<label class="col-auto"><input type="radio" name="lang" value="c"> gcc -O2 -std=c99 -lm</label>
+					<label class="col-auto"><input type="radio" name="lang" value="cpp"> g++ -O2 -std=c++11</label>
+					<div class="col-auto"><button class="btn btn-primary">Upload</button></div>
+				</div>
+				<textarea class="form-control" name="code"  style="height:610px"></textarea>
+			</form>
+		</div>
+	</div>
+</template>

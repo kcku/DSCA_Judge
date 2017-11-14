@@ -1,0 +1,19 @@
+<template name="problem_main">
+	<div class="row">
+		<div class="col-4">{{> problem_list shareArgs}}</div>
+		<div class="col-8">
+			<ul class="nav nav-tabs">
+				<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#problem_detail_tpl">Details</a></li>
+				<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#problem_test_tpl">Tests</a></li>
+				<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#problem_upload_tpl">Upload</a></li>
+				<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#problem_submission_main_tpl">Submissions</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane" id="problem_detail_tpl">{{> problem_detail shareArgs}}</div>
+				<div class="tab-pane" id="problem_test_tpl">{{> problem_test shareArgs}}</div>
+				<div class="tab-pane" id="problem_upload_tpl">{{> problem_upload shareArgs}}</div>
+				<div class="tab-pane" id="problem_submission_main_tpl">{{> submission_main shareArgs}}</div>
+			</div>
+		</div>
+	</div>
+</template>

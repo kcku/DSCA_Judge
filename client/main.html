@@ -1,0 +1,30 @@
+<head>
+	<title>DSCA Judge</title>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+	<script>window.onload = function(){ new Clipboard('.btn'); }</script>
+</head>
+<body>
+	<ul class="nav nav-pills bg-secondary" style="min-width:1200px">
+		<li class="nav-item"><a class="nav-link text-white"><strong>DSCA Judge</strong></a></li>
+  		<li class="nav-item"><a class="nav-link text-white" data-toggle="pill" href="#problem_main_tpl">Problems</a></li>
+		<li class="nav-item"><a class="nav-link text-white" data-toggle="pill" href="#student_main_tpl">Students</a></li>
+		<li class="nav-item ml-auto text-white">
+		{{#if currentUser}}
+			<form class="form-inline logout-form">
+				<strong class="mr-2">Hi,{{currentUser.fullname}}</strong>
+				<button class="btn btn-warning">Logout</button>
+			</form>
+		{{else}}
+			<form class="form-inline login-form">
+				<input type="text" class="form-control" name="username" placeholder="Username" style="width:150px">
+				<input type="password" class="form-control" name="password" placeholder="Password" style="width:150px">
+				<button class="btn btn-primary">Login</button>
+  			</form>
+  		{{/if}}
+  		</li>
+	</ul>
+	<div class="tab-content" style="min-width:1200px; overflow-x:hidden">
+		<div class="tab-pane" id="problem_main_tpl">{{> problem_main}}</div>
+		<div class="tab-pane" id="student_main_tpl">{{> student_main}}</div>
+	</div>
+</body>

@@ -1,0 +1,40 @@
+<template name="problem_detail">
+	<div class="card" style="height:700px; {{#unless currentProblemId.get}}display:none{{/unless}}">
+		<div class="card-body">
+			<div class="form-group">
+				<h4 data-toggle=".title-edit" class="title-view card-title">{{currentProblem.title}}</h4>
+				<input data-toggle=".title-view" class="title-edit form-control" type="text" name="title" value={{currentProblem.title}}>
+			</div>
+		{{#if $.Meteor.isAdmin}}
+			<div class="form-group row">
+				<label class="col-2">
+					<input type="checkbox" name="isExam" checked={{currentProblem.isExam}}> Exam
+				</label>
+				<label class="col-2">
+					<input type="checkbox" name="isPublic" checked={{currentProblem.isPublic}}> Public
+				</label>
+			</div>
+		{{/if}}
+			<div class="form-group">
+				<h4 class="card-title">Description</h4>
+				{{#mathjax}}<p data-toggle=".description-edit" class="description-view card-text">{{currentProblem.description}}</p>{{/mathjax}}
+				<textarea data-toggle=".description-view" class="description-edit form-control" name="description">{{currentProblem.description}}</textarea>
+			</div>
+			<div class="form-group">
+				<h4 class="card-title">Input Format</h4>
+				{{#mathjax}}<p data-toggle=".inputFormat-edit" class="inputFormat-view card-text">{{currentProblem.inputFormat}}</p>{{/mathjax}}
+				<textarea data-toggle=".inputFormat-view" class="inputFormat-edit form-control" name="inputFormat">{{currentProblem.inputFormat}}</textarea>
+			</div>
+			<div class="form-group">
+				<h4 class="card-title">Output Format</h4>
+				{{#mathjax}}<p data-toggle=".outputFormat-edit" class="outputFormat-view card-text">{{currentProblem.outputFormat}}</p>{{/mathjax}}
+				<textarea data-toggle=".outputFormat-view" class="outputFormat-edit form-control" name="outputFormat">{{currentProblem.outputFormat}}</textarea>
+			</div>
+			<div class="form-group">
+				<h4 class="card-title">Hint</h4>
+				{{#mathjax}}<p data-toggle=".hint-edit" class="hint-view card-text">{{currentProblem.hint}}</p>{{/mathjax}}
+				<textarea data-toggle=".hint-view" class="hint-edit form-control" name="hint">{{currentProblem.hint}}</textarea>
+			</div>
+		</div>
+	</div>
+</template>

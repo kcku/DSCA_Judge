@@ -1,0 +1,15 @@
+<template name="student_main">
+	<div class="row">
+		<div class="col-4">{{> student_list shareArgs}}</div>
+		<div class="col-8">
+			<ul class="nav nav-tabs">
+				<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#student_detail_tpl">Details</a></li>
+				<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#student_submission_main_tpl">Submissions</a></li>
+			</ul>
+			<div class="tab-content">
+				<div class="tab-pane" id="student_detail_tpl">{{> student_detail shareArgs}}</div>
+				<div class="tab-pane" id="student_submission_main_tpl">{{> submission_main shareArgs}}</div>
+			</div>
+		</div>
+	</div>
+</template>

@@ -1,0 +1,66 @@
+<template name="problem_test">
+	<div class="row" style={{#unless currentProblemId.get}}display:none{{/unless}}>
+		<div class="col-9">
+			<div class="card" style={{#unless currentProblemTest}}display:none{{/unless}}>
+  				<div class="card-body">
+  					<div class="form-group row">
+  						<div class="col-6">
+  							<div data-toggle=".timeLimit-edit" class="timeLimit-view card-text">Time Limit: {{currentProblemTest.timeLimit}} ms</div>
+  							<input data-toggle=".timeLimit-view" class="timeLimit-edit form-control" type="number" name="timeLimit" value={{currentProblemTest.timeLimit}}>
+  						</div>
+  						<div class="col-6">
+  							<div data-toggle=".memoryLimit-edit" class="memoryLimit-view card-text">Memory Limit: {{currentProblemTest.memoryLimit}} kb</div>
+  							<input data-toggle=".memoryLimit-view" class="memoryLimit-edit form-control" type="number" name="memoryLimit" value={{currentProblemTest.memoryLimit}}>
+  						</div>
+  					</div>
+  					<div class="form-group row">
+  						<div class="col-6">
+  							<div data-toggle=".score-edit" class="score-view card-text">Score: {{currentProblemTest.score}}</div>
+  							<input data-toggle=".score-view" class="score-edit form-control" type="number" name="score" value={{currentProblemTest.score}}>
+  						</div>
+  					{{#if $.Meteor.isAdmin}}
+						<label class="col-6">
+          					<input type="checkbox" name="isPublic" checked={{currentProblemTest.isPublic}}> Public
+        				</label>
+        			{{/if}}
+  					</div>
+  					<div class="form-group row">
+  						<div class="col-6">
+    						<h4>Input <button data-clipboard-target=".input-view" class="ml-3 btn btn-sm btn-info fa fa-copy"></button></h4>
+    						<p style="height:510px" data-toggle=".input-edit" class="input-view card-text">{{currentProblemTest.input}}</p>
+							<textarea style="height:510px" data-toggle=".input-view" class="input-edit form-control" name="input">{{currentProblemTest.input}}</textarea>
+    					</div>
+    					<div class="col-6">
+							<h4>Output <button data-clipboard-target=".output-view" class="ml-3 btn btn-sm btn-info fa fa-copy"></button></h4>
+							<p style="height:510px" data-toggle=".output-edit" class="output-view card-text">{{currentProblemTest.output}}</p>
+							<textarea style="height:510px" data-toggle=".output-view" class="output-edit form-control" name="output">{{currentProblemTest.output}}</textarea>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="card">
+		  		<div class="card-header">
+				{{#if $.Meteor.isAdmin}}
+					<button class="btn btn-sm btn-primary insert-btn fa fa-plus"></button>
+				{{/if}}
+					<strong class="ml-1">Test List</strong>
+		  		</div>
+			  	<ul class="list-group" style="height:660px">
+				{{#each problemTest in problemTestList}}
+			  		<li data-id={{problemTest._id}} class="list-group-item get-btn {{#if $eq currentProblemTest._id problemTest._id}}active{{/if}}">
+	    			{{#if $.Meteor.isAdmin}}
+	    				<button data-id={{problemTest._id}} class="btn btn-sm btn-danger remove-btn fa fa-remove"></button>
+	    			{{/if}}
+		    			<span class="ml-1">Test #{{@index}}</span>
+		    		{{#unless problemTest.isPublic}}
+		    			<span class="ml-1 fa fa-ban"></span>
+		    		{{/unless}}
+		    		</li>
+		  		{{/each}}
+		  		</ul>
+			</div>
+		</div>
+	</div>
+</template>

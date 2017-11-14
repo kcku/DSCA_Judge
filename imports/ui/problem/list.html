@@ -1,0 +1,26 @@
+<template name="problem_list">
+	<div class="card">
+  		<div class="card-header">
+		{{#if $.Meteor.isAdmin}}
+			<button class="btn btn-sm btn-primary insert-btn fa fa-plus"></button>
+		{{/if}}
+			<strong class="ml-1">Problem List</strong>
+  		</div>
+	  	<ul class="list-group" style="height:700px">
+	  	{{#each problem in problemList}}
+	    	<li data-id={{problem._id}} class="list-group-item get-btn {{#if $eq currentProblemId.get problem._id}}active{{/if}}">
+	    	{{#if $.Meteor.isAdmin}}
+	    		<button data-id={{problem._id}} class="btn btn-sm btn-danger remove-btn fa fa-remove"></button>
+	    	{{/if}}
+	    		<span class="ml-1">{{problem.title}}</span>
+	    	{{#if problem.isExam}}
+	    		<span class="ml-1 fa fa-book"></span>
+	    	{{/if}}
+	    	{{#unless problem.isPublic}}
+	    		<span class="ml-1 fa fa-ban"></span>
+	    	{{/unless}}
+	    	</li>
+		{{/each}}
+  		</ul>
+  	</div>
+</template>

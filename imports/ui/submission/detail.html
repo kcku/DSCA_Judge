@@ -1,0 +1,82 @@
+<template name="submission_detail">
+	<div class="modal detail-modal">
+		<div class="modal-dialog" style="min-width:85%">
+			<div class="modal-content">      			
+				<div class="modal-body">
+	<ul class="nav nav-tabs">
+		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#{{currentSubmission._id}}_detail_tpl">Details</a></li>
+		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#{{currentSubmission._id}}_result_tpl">Results</a></li>
+		<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#{{currentSubmission._id}}_code_tpl">Code</a></li>
+	</ul>
+	<div class="tab-content" style={{#unless currentSubmissionId.get}}display:none{{/unless}}>
+		<div class="tab-pane card" id="{{currentSubmission._id}}_detail_tpl">
+			<div class="card-body">
+				<div class="form-group row">
+					<div class="col-2">Student:</div>
+					<div class="col-10">{{getStudentUsername currentSubmission.studentId}}</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-2">Problem:</div>
+					<div class="col-10">{{getProblemTitle currentSubmission.problemId}}</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-2">Created at:</div>
+					<div class="col-10">{{moFormat (momentReactive currentSubmission.createdAt) 'YYYY/MM/DD HH:mm:ss'}}</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-2">Status:</div>
+					<div class="col-10">{{currentSubmission.status}}</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-2">Score:</div>
+					<div class="col-10">{{currentSubmission.score}}</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-2">Language:</div>
+					<div class="col-10">
+					{{#if $.Meteor.isAdmin}}
+						<label class="mr-3"><input type="radio" name="lang" value="c" checked={{$eq currentSubmission.lang 'c'}}> C</label>
+						<label class="mr-3"><input type="radio" name="lang" value="cpp" checked={{$eq currentSubmission.lang 'cpp'}}> C++</label>
+					{{else}}
+						{{currentSubmission.lang}}
+					{{/if}}
+					</div>
+				</div>
+			{{#if $.Meteor.isAdmin}}
+				<div class="form-group row">
+					<div class="col-2">Exam:</div>
+					<div class="col-10"><input type="checkbox" name="isExam" checked={{currentSubmission.isExam}}></div>
+				</div>
+			{{/if}}
+			</div>
+		</div>
+		<div class="tab-pane card" id="{{currentSubmission._id}}_result_tpl">
+			<div class="card-header">
+				<strong>Result List</strong>
+			</div>
+			<ul class="list-group">
+			{{#each submissionResult in submissionResultList}}
+		    	<li class="list-group-item">
+		    		<div class="row justify-content-between">
+			    		<div class="col-auto">Test #{{@index}}</div>
+			    		<div class="col-auto {{getStatusClass submissionResult.status}}">{{submissionResult.status}}</div>
+			    		<div class="col-auto">{{submissionResult.timeUsed}} ms</div>
+			    		<div class="col-auto">{{submissionResult.memoryUsed}} kb</div>
+			    	</div>
+		    	</li>
+			{{/each}}
+			</ul>
+		</div>
+		<div class="tab-pane card" id="{{currentSubmission._id}}_code_tpl">
+			<div class="card-header">
+				code.{{currentSubmission.lang}} <button data-clipboard-target=".code-view" class="ml-3 btn btn-sm btn-info fa fa-copy"></button>
+			</div>
+			<p style="height:600px" data-toggle=".code-edit" class="code-view">{{currentSubmission.code}}</p>
+			<textarea style="height:600px" data-toggle=".code-view" class="code-edit form-control" name="code">{{currentSubmission.code}}</textarea>
+		</div>
+	</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

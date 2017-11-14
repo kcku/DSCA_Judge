@@ -1,0 +1,23 @@
+<template name="student_list">
+	<div class="card">
+  		<div class="card-header">
+		{{#if $.Meteor.isAdmin}}
+			<button class="btn btn-sm btn-primary insert-btn fa fa-plus"></button>
+		{{/if}}
+			<strong class="ml-1">Student List</strong>
+  		</div>
+	  	<ul class="list-group"  style="height:700px">
+	  	{{#each student in studentList}}
+	    	<li data-id={{student._id}} class="list-group-item get-btn {{#if $eq currentStudentId.get student._id}}active{{/if}}">
+	    	{{#if $.Meteor.isAdmin}}
+	    		<button data-id={{student._id}} class="btn btn-sm btn-danger remove-btn fa fa-remove"></button>
+	    	{{/if}}
+	    		<span class="ml-1">{{student.username}}</span>
+	    	{{#if student.isAdmin}}
+	    		<span class="ml-1 fa fa-user-secret"></span>
+	    	{{/if}}
+	    	</li>
+		{{/each}}
+  		</ul>
+  	</div>
+</template>

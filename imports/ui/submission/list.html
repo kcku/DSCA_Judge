@@ -1,0 +1,28 @@
+<template name="submission_list">
+	<div class="card" style={{#unless $or currentProblemId.get currentStudentId.get}}display:none{{/unless}}>
+  		<div class="card-header">
+			<strong class="ml-1">Submission List</strong>
+  		</div>
+	  	<ul class="list-group" style="height:660px">
+	  	{{#each submission in submissionList}}
+	    	<li data-id={{submission._id}} class="list-group-item get-btn {{#if $eq currentSubmissionId.get submission._id}}active{{/if}}">
+	    		<div class="row justify-content-between">
+		    		<div class="col-auto">
+		    		{{#if $.Meteor.isAdmin}}
+			    		<button data-id={{submission._id}} class="btn btn-sm btn-danger remove-btn fa fa-remove"></button>
+		    		{{/if}}
+		    			<span class="ml-1">{{getStudentUsername submission.studentId}}</span>
+		    		</div>
+		    		<div class="col-auto">{{getProblemTitle submission.problemId}}
+					{{#if submission.isExam}}
+						<span class="ml-1 fa fa-book"></span>
+					{{/if}}
+					</div>
+		    		<div class="col-auto">{{moFromNow (momentReactive submission.createdAt)}}</div>
+		    		<div class="col-auto {{getStatusClass submission.status}}">{{submission.status}}</div>
+		    	</div>
+	    	</li>
+		{{/each}}
+  		</ul>
+  	</div>
+</template>

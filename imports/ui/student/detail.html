@@ -1,0 +1,59 @@
+<template name="student_detail">
+	<div class="card" style="height:700px; {{#unless currentStudentId.get}}display:none{{/unless}}">
+  		<div class="card-body">
+			<div class="form-group row">
+				<div class="col-2">Username:</div>
+				<div class="col-10">
+					<div data-toggle=".username-edit" class="username-view card-text">{{currentStudent.username}}</div>
+					<input data-toggle=".username-view" class="username-edit form-control" type="text" name="username" value={{currentStudent.username}}>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-2">Fullname:</div>
+				<div class="col-10">
+					<div data-toggle=".fullname-edit" class="fullname-view card-text">{{currentStudent.fullname}}</div>
+					<input data-toggle=".fullname-view" class="fullname-edit form-control" type="text" name="fullname" value={{currentStudent.fullname}}>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-2">Email:</div>
+				<div class="col-10">
+					<div data-toggle=".email-edit" class="email-view card-text">{{currentStudent.emails.[0].address}}</div>
+					<input data-toggle=".email-view" class="email-edit form-control" type="email" name="email" value={{currentStudent.emails.[0].address}}>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-2">Year:</div>
+				<div class="col-10">
+					<div data-toggle=".year-edit" class="year-view card-text">{{currentStudent.year}}</div>
+  					<input data-toggle=".year-view" class="year-edit form-control" type="number" name="year" value={{currentStudent.year}}>
+				</div>
+			</div>
+		{{#if $.Meteor.isAdmin}}
+			<div class="form-group row">
+				<div class="col-2">Password:</div>
+				<div class="col-10">
+					<div data-toggle=".password-edit" class="password-view card-text">Click to set password</div>
+					<input data-toggle=".password-view" class="password-edit form-control" type="password" name="password" style="display:none">
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-2">Admin:</div>
+				<div class="col-10"><input type="checkbox" name="isAdmin" checked={{currentStudent.isAdmin}}></div>
+			</div>
+		{{else}}{{#if $.Meteor.isOwner currentStudentId.get}}
+			<form class="chgpwd-form">
+				<div class="form-group row">
+					<div class="col-2">Old password:</div>
+					<div class="col-10"><input class="form-control" type="password" name="oldPassword"></div>
+				</div>
+				<div class="form-group row">
+					<div class="col-2">New password:</div>
+					<div class="col-10"><input class="form-control" type="password" name="newPassword"></div>
+				</div>
+				<div class="offset-2"><button class="btn btn-default">Change Password</button></div>
+			</form>
+		{{/if}}{{/if}}
+		</div>
+	</div>
+</template>
