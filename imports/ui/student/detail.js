@@ -26,7 +26,7 @@ Template.student_detail.events({
 		const toggle = target.dataset.toggle;
 		const field = target.name;
 		const value = target.value;
-console.log(field, value);
+		
 		instance.$(target).hide();
 		instance.$(toggle).show();
 		
