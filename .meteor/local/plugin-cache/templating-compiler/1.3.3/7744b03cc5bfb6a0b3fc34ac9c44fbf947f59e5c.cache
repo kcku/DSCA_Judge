@@ -1,0 +1,1 @@
+{"head":"","body":"","js":"\nTemplate.__checkName(\"problem_upload\");\nTemplate[\"problem_upload\"] = new Template(\"Template.problem_upload\", (function() {\n  var view = this;\n  return \"\";\n}));\n","bodyAttrs":{}}
